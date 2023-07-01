@@ -1,0 +1,14 @@
+[
+  { "bulan": "Januari", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "Februari", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "Maret", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "April", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "Mei", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "Juni", "curahHujan": "500", "suhuUdara": "26" },
+  { "bulan": "Juli", "curahHujan": "200", "suhuUdara": "24" },
+  { "bulan": "Agustus", "curahHujan": "200", "suhuUdara": "24" },
+  { "bulan": "September", "curahHujan": "200", "suhuUdara": "24" },
+  { "bulan": "Oktober", "curahHujan": "200", "suhuUdara": "24" },
+  { "bulan": "November", "curahHujan": "200", "suhuUdara": "24" },
+  { "bulan": "Desember", "curahHujan": "200", "suhuUdara": "24" }
+]

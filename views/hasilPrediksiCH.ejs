@@ -1,0 +1,64 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-4">
+      <a href="/prediksi" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">Curah Hujan Tahun <%= tahun %></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <% climates.forEach(climate => { %>
+            <th scope="col"><%= climate.bulan %></th>
+            <% }) %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% climates.forEach(climate => { %>
+            <td><%= climate.curahHujan %></td>
+            <% }) %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 bg-light">
+      <canvas id="myChart" width="200" height="100"></canvas>
+      <%= console.log(climates) %>
+      <script>
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+            datasets: [
+              {
+                label: "Curah Hujan",
+                data: [10, 4, 3, 5, 6, 4, 7, 3, 8, 9, 3, 5],
+                borderWidth: 4,
+                borderColor: ["rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)"],
+              },
+            ],
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+          },
+        });
+      </script>
+    </div>
+  </div>
+</div>

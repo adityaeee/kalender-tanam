@@ -1,0 +1,14 @@
+[
+  { "tanaman": "padi", "ilmiah": "Oryza sativa", "chBB": "456", "chBA": "567", "suBB": "25", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "cabai", "ilmiah": "Capsicum frutescens", "chBB": "123", "chBA": "234", "suBB": "23", "suBA": "27", "masaTanam": "4" },
+  { "tanaman": "kedelai", "ilmiah": "Glycine max", "chBB": "234", "chBA": "345", "suBB": "24", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "kacang hijau", "ilmiah": "Vigna radiata", "chBB": "123", "chBA": "234", "suBB": "23", "suBA": "27", "masaTanam": "4" },
+  { "tanaman": "jagung", "ilmiah": "Zea mays", "chBB": "456", "chBA": "567", "suBB": "25", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "tomat", "ilmiah": "Solanum lycopersicum", "chBB": "234", "chBA": "345", "suBB": "24", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "ubi jalar", "ilmiah": "Ipomoea batatas", "chBB": "123", "chBA": "234", "suBB": "23", "suBA": "27", "masaTanam": "4" },
+  { "tanaman": "kacang tanah", "ilmiah": "Arachis hypogaea", "chBB": "456", "chBA": "567", "suBB": "25", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "ubi kayu", "ilmiah": "Manihot esculenta", "chBB": "234", "chBA": "345", "suBB": "24", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "terong", "ilmiah": "Solanum melongena", "chBB": "123", "chBA": "234", "suBB": "23", "suBA": "27", "masaTanam": "4" },
+  { "tanaman": "bawang merah", "ilmiah": "Allium cepa", "chBB": "234", "chBA": "345", "suBB": "24", "suBA": "29", "masaTanam": "4" },
+  { "tanaman": "kacang panjang", "ilmiah": "Vigna unguiculata", "chBB": "456", "chBA": "567", "suBB": "25", "suBA": "29", "masaTanam": "4" }
+]
