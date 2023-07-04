@@ -7,66 +7,52 @@ if (!fs.existsSync("./data/plants.json")) {
   fs.writeFileSync("./data/plants.json", "[]", "utf-8");
 }
 
-const loadTanaman = () => {
+const loadPlants = () => {
   const file = fs.readFileSync("data/plants.json", "utf8");
   const plants = JSON.parse(file);
   return plants;
 };
 
-const findTanaman = (tanaman) => {
-  const plants = loadTanaman();
+const findPlant = (tanaman) => {
+  const plants = loadPlants();
 
   const plant = plants.find((plant) => plant.tanaman.toLowerCase() === tanaman.toLowerCase());
   return plant;
 };
 
-const saveTanaman = (tanaman, ilmiah, chBB, chBA, suhuBB, suhuBA) => {
-  const plant = { tanaman, ilmiah, chBB, chBA, suhuBB, suhuBA };
-  const plants = loadTanaman();
-
-  //   cek duplikat
-  const duplikat = plants.find((plant) => plant.tanaman === tanaman);
-  if (duplikat) {
-    console.log("Tanaman sudah terdaftar");
-    return false;
-  }
-
-  plants.push(plant);
+const savePlants = (plants) => {
   fs.writeFileSync("data/plants.json", JSON.stringify(plants));
-  console.log("Berhasil");
 };
 
-const listTanaman = () => {
-  const plants = loadTanaman();
-  plants.forEach((plant, i) => {
-    console.log(`${i + 1}. ${plant.tanaman}`);
-  });
+const addPlant = (plant) => {
+  const plants = loadPlants();
+  plants.push(plant);
+  savePlants(plants);
 };
 
-const detailTanaman = (tanaman) => {
-  const plants = loadTanaman();
+//   //   cek duplikat
+//   const duplikat = plants.find((plant) => plant.tanaman === tanaman);
+//   if (duplikat) {
+//     console.log("Tanaman sudah terdaftar");
+//     return false;
+//   }
 
-  const plant = plants.find((plant) => plant.tanaman.toLowerCase() === tanaman.toLowerCase());
+//   plants.push(plant);
+//   fs.writeFileSync("data/plants.json", JSON.stringify(plants));
+//   console.log("Berhasil");
+// };
 
-  if (!plant) {
-    console.log(`tanaman ${tanaman} tidak ditemukan`);
-    return false;
-  }
+// const deleteTanaman = (tanaman) => {
+//   const plants = loadTanaman();
+//   const newPlants = plants.filter((plant) => plant.tanaman.toLowerCase() !== tanaman.toLowerCase());
 
-  // console.log(`${plant.tanaman} - ${plant.chBB} - ${plant.chBA} - ${plant.suhuBB} - ${plant.suhuBA}`);
-};
+//   if (plants.length === newPlants.length) {
+//     console.log(`${tanaman} tidak ditemukan`);
+//     return false;
+//   }
 
-const deleteTanaman = (tanaman) => {
-  const plants = loadTanaman();
-  const newPlants = plants.filter((plant) => plant.tanaman.toLowerCase() !== tanaman.toLowerCase());
+//   fs.writeFileSync("data/plants.json", JSON.stringify(newPlants));
+//   console.log(`${tanaman} berhasil di hapus`);
+// };
 
-  if (plants.length === newPlants.length) {
-    console.log(`${tanaman} tidak ditemukan`);
-    return false;
-  }
-
-  fs.writeFileSync("data/plants.json", JSON.stringify(newPlants));
-  console.log(`${tanaman} berhasil di hapus`);
-};
-
-module.exports = { loadTanaman, saveTanaman, listTanaman, detailTanaman, deleteTanaman, findTanaman };
+module.exports = { loadPlants, findPlant, addPlant };

@@ -18,8 +18,8 @@
             <th scope="col">Keterangan</th>
           </tr>
         </thead>
-        <% climates.forEach((climate,i) => { %>
         <tbody>
+          <% climates.forEach((climate,i) => { %>
           <tr>
             <th scope="row"><%= climate.bulan %></th>
             <td><%= climate.curahHujan %> mm</td>
@@ -30,8 +30,8 @@
             <td><a href="" class="btn btn-danger badge">Tidak Layak</a></td>
             <% } %>
           </tr>
+          <% }) %>
         </tbody>
-        <% }) %>
       </table>
     </div>
   </div>

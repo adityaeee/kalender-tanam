@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const iklim = require("../utils/iklim");
 
 router.get("/", function (req, res) {
@@ -11,9 +11,20 @@ router.get("/", function (req, res) {
 });
 
 router.get("/curahHujan", function (req, res) {
-  climates = iklim.loadIklim();
+  climates = iklim.loadClimates();
   tahun = process.env.TAHUN;
   res.render("hasilPrediksiCH", {
+    layout: "layouts/main-layouts",
+    title: "Hasil Prediksi",
+    iklim,
+    climates,
+  });
+});
+
+router.get("/suhuUdara", function (req, res) {
+  climates = iklim.loadClimates();
+  tahun = process.env.TAHUN;
+  res.render("hasilPrediksiSU", {
     layout: "layouts/main-layouts",
     title: "Hasil Prediksi",
     iklim,

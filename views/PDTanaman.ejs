@@ -1,0 +1,48 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-4">
+      <a href="/data" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">DATA TANAMAN</h2>
+    </div>
+    <div class="col-md-2">
+      <a href="/katam/tambahTanaman" class="btn btn-dark">Tambah Tanaman</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <% if (msg.length !== 0) { %>
+      <div class="alert alert-dark" role="alert"><%= msg %></div>
+      <% } %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Tanaman</th>
+            <th scope="col">Ilmiah</th>
+            <th scope="col">Curah Hujan Min</th>
+            <th scope="col">Curah Hujan Max</th>
+            <th scope="col">Suhu Udara Min</th>
+            <th scope="col">Suhu Udara Max</th>
+            <th scope="col">Masa Tanam</th>
+            <th scope="col">Ket</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% plants.forEach(plant => { %>
+          <tr>
+            <th scope="row"><%= plant.tanaman %></th>
+            <td><%= plant.ilmiah %></td>
+            <td><%= plant.chBB %> mm</td>
+            <td><%= plant.chBA %> mm</td>
+            <td><%= plant.suBB %> °C</td>
+            <td><%= plant.suBA %> °C</td>
+            <td><%= plant.masaTanam %> Bulan</td>
+            <td><a href="/katam/edit/<%= plant.tanaman %>" class="btn btn-dark badge">Edit</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

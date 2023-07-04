@@ -1,23 +1,36 @@
 require("dotenv").config();
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const flash = require("connect-flash");
 
-var indexRouter = require("./routes/index");
-var kalenderTanamRouter = require("./routes/kalenderTanam");
-var hasilPrediksiRouter = require("./routes/hasilPrediksi");
-var pengelolaanDataRouter = require("./routes/pengelolaanData");
-const exp = require("constants");
+const indexRouter = require("./routes/index");
+const kalenderTanamRouter = require("./routes/kalenderTanam");
+const hasilPrediksiRouter = require("./routes/hasilPrediksi");
+const pengelolaanDataRouter = require("./routes/pengelolaanData");
+// const exp = require("constants");
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+//configurasi flash
+app.use(cookieParser("secret"));
+app.use(
+  session({
+    cookie: { maxAge: 6000 },
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(flash());
 
 //Built-in middelware
 app.use(express.static("public"));

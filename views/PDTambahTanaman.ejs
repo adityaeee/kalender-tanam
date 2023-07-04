@@ -1,0 +1,46 @@
+<div class="container mt-3">
+  <div class="row text-center">
+    <h2 class="fw-bold">FORM TAMBAH DATA</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form method="post" action="/katam/">
+        <div class="mb-3">
+          <label for="tanaman" class="form-label">Nama Tanaman</label>
+          <input type="text" class="form-control" id="tanaman" name="tanaman" required />
+        </div>
+        <div class="mb-3">
+          <label for="ilmiah" class="form-label">Nama Ilmiah</label>
+          <input type="text" class="form-control" id="ilmiah" name="ilmiah" required />
+        </div>
+        <div class="mb-3">
+          <label for="chBB" class="form-label">Curah Hujan Minimum</label>
+          <input type="text" class="form-control" id="chBB" name="chBB" required />
+        </div>
+        <div class="mb-3">
+          <label for="chBA" class="form-label">Curah Hujan Maksimum</label>
+          <input type="text" class="form-control" id="chBA" name="chBA" required />
+        </div>
+        <div class="mb-3">
+          <label for="suBB" class="form-label">Suhu Udara Minimum</label>
+          <input type="text" class="form-control" id="suBB" name="suBB" required />
+        </div>
+        <div class="mb-3">
+          <label for="suBA" class="form-label">Suhu Udara Maksimum</label>
+          <input type="text" class="form-control" id="suBA" name="suBA" required />
+        </div>
+        <div class="mb-4">
+          <label for="masaTanam" class="form-label">Masa Tanam (bulan)</label>
+          <input type="text" class="form-control" id="masaTanam" name="masaTanam" required />
+          <div id="masaTanamHelp" class="form-text">lamanya waktu yang dibutuhkan tanaman sampai bisa panen</div>
+        </div>
+        <!-- <div class="mb-3">
+          <label for="gambar" class="form-label">Upload Gambar</label>
+          <input type="file" class="form-control-file" id="gambar" name="gambar" />
+        </div> -->
+        <button type="reset" class="btn btn-dark">Reset</button>
+        <button type="submit" class="btn btn-dark">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
