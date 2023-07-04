@@ -1,0 +1,60 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/data/tanaman" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">FORM UBAH DATA TANAMAN</h2>
+    </div>
+  </div>
+  <% if (typeof errors != 'undefined') { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form method="post" action="/katam/update">
+        <input type="hidden" name="oldTanaman" value="<%= (plant.oldTanaman) ? plant.oldTanaman : plant.tanaman %>" />
+        <div class="mb-3">
+          <label for="tanaman" class="form-label">Nama Tanaman</label>
+          <input type="text" class="form-control" id="tanaman" name="tanaman" required value="<%= plant.tanaman %>" />
+        </div>
+        <div class="mb-3">
+          <label for="ilmiah" class="form-label">Nama Ilmiah</label>
+          <input type="text" class="form-control" id="ilmiah" name="ilmiah" required value="<%= plant.ilmiah %>" />
+        </div>
+        <div class="mb-3">
+          <label for="chBB" class="form-label">Curah Hujan Minimum</label>
+          <input type="text" class="form-control" id="chBB" name="chBB" required value="<%= plant.chBB %>" />
+        </div>
+        <div class="mb-3">
+          <label for="chBA" class="form-label">Curah Hujan Maksimum</label>
+          <input type="text" class="form-control" id="chBA" name="chBA" required value="<%= plant.chBA %>" />
+        </div>
+        <div class="mb-3">
+          <label for="suBB" class="form-label">Suhu Udara Minimum</label>
+          <input type="text" class="form-control" id="suBB" name="suBB" required value="<%= plant.suBB %>" />
+        </div>
+        <div class="mb-3">
+          <label for="suBA" class="form-label">Suhu Udara Maksimum</label>
+          <input type="text" class="form-control" id="suBA" name="suBA" required value="<%= plant.suBA %>" />
+        </div>
+        <div class="mb-4">
+          <label for="masaTanam" class="form-label">Masa Tanam (bulan)</label>
+          <input type="text" class="form-control" id="masaTanam" name="masaTanam" required value="<%= plant.masaTanam %>" />
+          <div id="masaTanamHelp" class="form-text">lamanya waktu yang dibutuhkan tanaman sampai bisa panen</div>
+        </div>
+        <!-- <div class="mb-3">
+          <label for="gambar" class="form-label">Upload Gambar</label>
+          <input type="file" class="form-control-file" id="gambar" name="gambar" />
+        </div> -->
+        <button type="submit" class="btn btn-dark">Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,21 @@
 <div class="container mt-3">
-  <div class="row text-center">
-    <h2 class="fw-bold">FORM TAMBAH DATA</h2>
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/data/tanaman" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">FORM TAMBAH DATA TANAMAN</h2>
+    </div>
+  </div>
+
+  <% if (typeof errors != 'undefined') { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
   </div>
   <div class="row">
     <div class="col-md-6">
@@ -39,7 +54,7 @@
           <input type="file" class="form-control-file" id="gambar" name="gambar" />
         </div> -->
         <button type="reset" class="btn btn-dark">Reset</button>
-        <button type="submit" class="btn btn-dark">Submit</button>
+        <button type="submit" class="btn btn-dark">Tambah Tanaman</button>
       </form>
     </div>
   </div>

@@ -13,6 +13,17 @@ const loadPlants = () => {
   return plants;
 };
 
+const savePlants = (plants) => {
+  fs.writeFileSync("data/plants.json", JSON.stringify(plants));
+};
+
+const addPlant = (plant) => {
+  plant.tanaman = plant.tanaman.toLowerCase();
+  const plants = loadPlants();
+  plants.push(plant);
+  savePlants(plants);
+};
+
 const findPlant = (tanaman) => {
   const plants = loadPlants();
 
@@ -20,39 +31,27 @@ const findPlant = (tanaman) => {
   return plant;
 };
 
-const savePlants = (plants) => {
-  fs.writeFileSync("data/plants.json", JSON.stringify(plants));
-};
-
-const addPlant = (plant) => {
+const deletePlant = (tanaman) => {
   const plants = loadPlants();
-  plants.push(plant);
-  savePlants(plants);
+  const filteredPlants = plants.filter((plant) => plant.tanaman.toLowerCase() !== tanaman.toLowerCase());
+
+  savePlants(filteredPlants);
 };
 
-//   //   cek duplikat
-//   const duplikat = plants.find((plant) => plant.tanaman === tanaman);
-//   if (duplikat) {
-//     console.log("Tanaman sudah terdaftar");
-//     return false;
-//   }
+//   cek duplikat
+const cekDuplikat = (tanaman) => {
+  const plants = loadPlants();
+  return plants.find((plant) => plant.tanaman.toLowerCase() === tanaman.toLowerCase());
+};
 
-//   plants.push(plant);
-//   fs.writeFileSync("data/plants.json", JSON.stringify(plants));
-//   console.log("Berhasil");
-// };
+const updatePlants = (newPlant) => {
+  const plants = loadPlants();
+  //hilangkan kontak nama yang tanaman sama dengan oldTanaman
+  const filteredPlants = plants.filter((plant) => plant.tanaman.toLowerCase() !== newPlant.oldTanaman.toLowerCase());
+  delete newPlant.oldTanaman;
+  newPlant.tanaman = newPlant.tanaman.toLowerCase();
+  filteredPlants.push(newPlant);
+  savePlants(filteredPlants);
+};
 
-// const deleteTanaman = (tanaman) => {
-//   const plants = loadTanaman();
-//   const newPlants = plants.filter((plant) => plant.tanaman.toLowerCase() !== tanaman.toLowerCase());
-
-//   if (plants.length === newPlants.length) {
-//     console.log(`${tanaman} tidak ditemukan`);
-//     return false;
-//   }
-
-//   fs.writeFileSync("data/plants.json", JSON.stringify(newPlants));
-//   console.log(`${tanaman} berhasil di hapus`);
-// };
-
-module.exports = { loadPlants, findPlant, addPlant };
+module.exports = { loadPlants, findPlant, addPlant, deletePlant, cekDuplikat, updatePlants };

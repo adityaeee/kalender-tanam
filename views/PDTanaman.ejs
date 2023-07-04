@@ -25,7 +25,8 @@
             <th scope="col">Suhu Udara Min</th>
             <th scope="col">Suhu Udara Max</th>
             <th scope="col">Masa Tanam</th>
-            <th scope="col">Ket</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
             <td><%= plant.suBA %> °C</td>
             <td><%= plant.masaTanam %> Bulan</td>
             <td><a href="/katam/edit/<%= plant.tanaman %>" class="btn btn-dark badge">Edit</a></td>
+            <td><a href="/katam/delete/<%= plant.tanaman %>" class="btn btn-danger badge" onclick="return confirm( 'Apakah Anda yakin ingin menghapus tanaman <%= plant.tanaman %>') ">Del</a></td>
           </tr>
           <% }) %>
         </tbody>
