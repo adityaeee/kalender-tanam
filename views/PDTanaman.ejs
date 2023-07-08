@@ -39,8 +39,13 @@
             <td><%= plant.suBB %> °C</td>
             <td><%= plant.suBA %> °C</td>
             <td><%= plant.masaTanam %> Bulan</td>
-            <td><a href="/katam/edit/<%= plant.tanaman %>" class="btn btn-dark badge">Edit</a></td>
-            <td><a href="/katam/delete/<%= plant.tanaman %>" class="btn btn-danger badge" onclick="return confirm( 'Apakah Anda yakin ingin menghapus tanaman <%= plant.tanaman %>') ">Del</a></td>
+            <td><a href="/katam/edit/<%= plant._id %>" class="btn btn-dark badge">Edit</a></td>
+            <td>
+              <form action="/katam?_method=DELETE" method="POST">
+                <input type="hidden" name="_id" value="<%= plant._id%>" />
+                <button type="submit" class="btn btn-danger badge" onclick="return confirm('Apakah Anda yakin ingin menghapus tanaman <%= plant.tanaman %>')">Del</button>
+              </form>
+            </td>
           </tr>
           <% }) %>
         </tbody>

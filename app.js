@@ -6,12 +6,15 @@ const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
+const methodOverride = require("method-override");
 
 const indexRouter = require("./routes/index");
 const kalenderTanamRouter = require("./routes/kalenderTanam");
 const hasilPrediksiRouter = require("./routes/hasilPrediksi");
 const pengelolaanDataRouter = require("./routes/pengelolaanData");
-// const exp = require("constants");
+
+//panggil mongoose
+require("./utils/db");
 
 const app = express();
 
@@ -34,6 +37,9 @@ app.use(flash());
 
 //Built-in middelware
 app.use(express.static("public"));
+
+//method override
+app.use(methodOverride("_method"));
 
 //menggunakan ejs
 app.set("view engine", "ejs");

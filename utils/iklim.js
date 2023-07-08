@@ -9,13 +9,13 @@ if (!fs.existsSync("./data/climates.json")) {
   fs.writeFileSync("./data/climates.json", "[]", "utf-8");
 }
 
-const loadClimates = () => {
-  const file = fs.readFileSync("data/climates.json", "utf8");
-  const climates = JSON.parse(file);
-  return climates;
-};
+// const loadClimates = () => {
+//   const file = fs.readFileSync("data/climates.json", "utf8");
+//   const climates = JSON.parse(file);
+//   return climates;
+// };
 
-const konvert = (plant) => {
+const convert = (plant) => {
   climates = loadClimates();
   const penyesuaian = [];
   climates.forEach((climate) => {
@@ -31,8 +31,7 @@ const konvert = (plant) => {
       penyesuaian.push("1");
     }
   });
-
   return penyesuaian;
 };
 
-module.exports = { loadClimates, konvert };
+module.exports = { convert };

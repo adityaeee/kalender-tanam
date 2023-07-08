@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const tanaman = require("../utils/tanaman");
+const Plant = require("../model/plant");
 
 router.get("/", function (req, res, next) {
   res.render("menuPengelolaanData", {
@@ -9,8 +10,8 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.get("/tanaman", function (req, res, next) {
-  plants = tanaman.loadPlants();
+router.get("/tanaman", async function (req, res) {
+  plants = await Plant.find();
 
   res.render("PDTanaman", {
     layout: "layouts/main-layouts",
