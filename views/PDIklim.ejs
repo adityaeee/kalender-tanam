@@ -1,0 +1,39 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-5">
+      <a href="/data" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">DATA IKLIM</h2>
+    </div>
+  </div>
+
+  <% if (msg.length !== 0) { %>
+  <div class="alert alert-dark" role="alert"><%= msg %></div>
+  <% } %>
+
+  <div class="row">
+    <div class="col-md">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Bulan</th>
+            <th scope="col">Curah Hujan</th>
+            <th scope="col">Suhu Udara</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% climates.forEach(climate => { %>
+          <tr>
+            <th scope="row"><%= climate.bulan %></th>
+            <td><%= climate.curahHujan %> mm</td>
+            <td><%= climate.suhuUdara %> °C</td>
+            <td><a href="/prediksi/edit/<%= climate._id %>" class="btn btn-dark badge">Edit</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

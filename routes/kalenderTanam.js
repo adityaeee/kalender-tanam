@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { body, validationResult, check } = require("express-validator");
-const { loadClimates, konvert } = require("../utils/iklim");
+const { convert } = require("../utils/iklim");
+// const tanaman = require("../utils/tanaman");
 const Plant = require("../model/plant");
-// const { findPlant, addPlant, loadPlants, deletePlant, cekDuplikat, updatePlants } = require("../utils/tanaman");
+const Climate = require("../model/climate");
 
 /* GET home page. */
 router.get("/", async (req, res) => {
@@ -51,7 +52,7 @@ router.post(
     } else {
       // req.body.tanaman = req.body.tanaman.toLowerCase();
       Plant.insertMany(req.body);
-      req.flash("msg", "Data tanaman berhasil ditambahkan");
+      req.flash("msg", `Data tanaman ${req.body.tanaman} berhasil ditambahkan`);
       res.redirect("/data/tanaman");
     }
   }
@@ -93,7 +94,6 @@ router.put(
         plant: req.body,
       });
     } else {
-      console.log(req.body);
       await Plant.updateOne(
         { _id: req.body._id },
         {
@@ -108,7 +108,7 @@ router.put(
           },
         }
       );
-      req.flash("msg", "Data tanaman berhasil diubah");
+      req.flash("msg", `Data tanaman ${req.body.tanaman} berhasil diubah`);
       res.redirect("/data/tanaman");
     }
   }
@@ -120,11 +120,12 @@ router.delete("/", async (req, res) => {
   res.redirect("/data/tanaman");
 });
 
-router.get("/:tanaman", async (req, res) => {
-  plant = await Plant.findOne({ tanaman: req.params.tanaman });
+//kalender tanam tiap tanaman
+router.get("/:_id", async (req, res) => {
+  plant = await Plant.findOne({ _id: req.params._id });
 
-  climates = loadClimates();
-  konversi = konvert(plant);
+  climates = await Climate.find();
+  konversi = await convert(plant);
 
   res.render("kalenderTanam", {
     layout: "layouts/main-layouts",

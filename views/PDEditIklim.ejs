@@ -1,0 +1,41 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/data/tanaman" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">FORM UBAH DATA CURAH HUJAN</h2>
+    </div>
+  </div>
+  <% if (typeof errors != 'undefined') { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md">
+      <h3>Bulan <%= climate.bulan %></h3>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <form method="post" action="/prediksi?_method=PUT">
+        <input type="hidden" name="_id" value="<%= climate._id %>" />
+        <input type="hidden" name="bulan" value="<%= climate.bulan %>" />
+        <div class="mb-3">
+          <label for="curahHujan" class="form-label">Curah Hujan</label>
+          <input type="text" class="form-control" id="curahHujan" name="curahHujan" required value="<%= climate.curahHujan %>" />
+        </div>
+        <div class="mb-3">
+          <label for="suhuUdara" class="form-label">Suhu Udara</label>
+          <input type="text" class="form-control" id="suhuUdara" name="suhuUdara" required value="<%= climate.suhuUdara %>" />
+        </div>
+        <button type="submit" class="btn btn-dark">Simpan Perubahan</button>
+      </form>
+    </div>
+  </div>
+</div>

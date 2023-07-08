@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const tanaman = require("../utils/tanaman");
 const Plant = require("../model/plant");
+const Climate = require("../model/climate");
+// const tanaman = require("../utils/tanaman");
 
 router.get("/", function (req, res, next) {
   res.render("menuPengelolaanData", {
@@ -21,10 +22,14 @@ router.get("/tanaman", async function (req, res) {
   });
 });
 
-router.get("/iklim", function (req, res, next) {
+router.get("/iklim", async function (req, res, next) {
+  climates = await Climate.find();
+
   res.render("PDIklim", {
     layout: "layouts/main-layouts",
     title: "Pengelolaan Data Iklim",
+    climates,
+    msg: req.flash("msg"),
   });
 });
 

@@ -10,23 +10,23 @@ const Plant = mongoose.model("Plant", {
     required: true,
   },
   chBB: {
-    type: String,
+    type: Number,
     required: true,
   },
   chBA: {
-    type: String,
+    type: Number,
     required: true,
   },
   suBB: {
-    type: String,
+    type: Number,
     required: true,
   },
   suBA: {
-    type: String,
+    type: Number,
     required: true,
   },
   masaTanam: {
-    type: String,
+    type: Number,
     required: true,
   },
 });
