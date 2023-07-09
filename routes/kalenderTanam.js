@@ -34,14 +34,30 @@ router.post(
       }
       return true;
     }),
+
     check("chBB", "Curah Hujan harus numerik").isNumeric(),
     check("chBB", "Curah Hujan harus numerik").isNumeric(),
     check("chBA", "Curah Hujan harus numerik").isNumeric(),
     check("suBB", "Suhu Udara harus numerik").isNumeric(),
     check("suBA", "Suhu Udara harus numerik").isNumeric(),
     check("masaTanam", "Masa Tanam harus numerik").isNumeric(),
+
+    body("chBB").custom((value, { req }) => {
+      if (req.body.chBA >= value) {
+        throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
+      }
+      return true;
+    }),
+
+    body("suBB").custom((value, { req }) => {
+      if (value >= req.body.suBA) {
+        throw new Error("Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum");
+      }
+      return true;
+    }),
   ],
   (req, res) => {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.render("PDTambahTanaman", {

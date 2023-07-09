@@ -1,0 +1,48 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-3">
+      <a href="/data/tanaman" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">CEK TANAMAN SENDIRI</h2>
+    </div>
+  </div>
+
+  <% if (typeof errors != 'undefined') { %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form method="post" action="/check/">
+        <div class="mb-3">
+          <label for="tanaman" class="form-label">Nama Tanaman</label>
+          <input type="text" class="form-control" id="tanaman" name="tanaman" required />
+        </div>
+        <div class="mb-3">
+          <label for="chBB" class="form-label">Curah Hujan Minimum</label>
+          <input type="text" class="form-control" id="chBB" name="chBB" required />
+        </div>
+        <div class="mb-3">
+          <label for="chBA" class="form-label">Curah Hujan Maksimum</label>
+          <input type="text" class="form-control" id="chBA" name="chBA" required />
+        </div>
+        <div class="mb-3">
+          <label for="suBB" class="form-label">Suhu Udara Minimum</label>
+          <input type="text" class="form-control" id="suBB" name="suBB" required />
+        </div>
+        <div class="mb-3">
+          <label for="suBA" class="form-label">Suhu Udara Maksimum</label>
+          <input type="text" class="form-control" id="suBA" name="suBA" required />
+        </div>
+        <button type="reset" class="btn btn-dark">Reset</button>
+        <button type="submit" class="btn btn-dark">Cek Kalender Tanaman</button>
+      </form>
+    </div>
+  </div>
+</div>
