@@ -2,6 +2,9 @@
   <!-- <img src="images/lahan.jpg" alt="background" class="img-fluid img-thumbneil" /> -->
   <div class="row">
     <div class="col text-center">
+      <% if (msg.length !== 0) { %>
+      <h1 class="display-4 fw-bolder"><%= msg %></h1>
+      <% } %>
       <h1 class="display-4 fw-bolder">KALENDER TANAM <%= tahun %></h1>
       <h1 class="display-4 fw-bolder">ACEH UTARA</h1>
     </div>

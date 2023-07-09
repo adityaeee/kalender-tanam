@@ -12,6 +12,7 @@ const indexRouter = require("./routes/index");
 const kalenderTanamRouter = require("./routes/kalenderTanam");
 const hasilPrediksiRouter = require("./routes/hasilPrediksi");
 const pengelolaanDataRouter = require("./routes/pengelolaanData");
+const loginRouter = require("./routes/login");
 
 //panggil mongoose
 require("./utils/db");
@@ -50,5 +51,6 @@ app.use("/home", indexRouter);
 app.use("/katam", kalenderTanamRouter);
 app.use("/prediksi", hasilPrediksiRouter);
 app.use("/data", pengelolaanDataRouter);
+app.use("/login", loginRouter);
 
 module.exports = app;

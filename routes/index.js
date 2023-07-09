@@ -6,6 +6,7 @@ router.get("/", function (req, res, next) {
     layout: "layouts/main-layouts",
     title: "KaLEnDeR TaNAm || Home",
     tahun: process.env.TAHUN,
+    msg: req.flash("msg"),
   });
 });
 
