@@ -15,6 +15,7 @@ router.get("/", function (req, res) {
 router.get("/curahHujan", async function (req, res) {
   climates = await Climate.find();
   tahun = process.env.TAHUN;
+  console.log(climates);
 
   res.render("hasilPrediksiCH", {
     layout: "layouts/main-layouts",

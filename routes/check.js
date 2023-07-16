@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Climate = require("../model/climate");
-const { convert } = require("../utils/iklim");
+const { convert } = require("../controller/index");
 
 router.get("/", async (req, res) => {
   res.render("inputCheck", {

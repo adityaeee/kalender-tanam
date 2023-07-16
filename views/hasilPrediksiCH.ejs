@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
+<% const data = climates.curahHujan %>
+
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-4">
@@ -45,7 +47,11 @@
             datasets: [
               {
                 label: "Curah Hujan",
-                data: [10, 4, 6, 7, 9, 4, 11, 5, 3, 5, 5, 8],
+                data: (climates) => {
+                  climates.map((_, index) => {
+                    return climates[0].curahHujan[index];
+                  });
+                },
                 borderWidth: 4,
                 borderColor: ["rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)"],
               },

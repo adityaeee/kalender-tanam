@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { body, validationResult, check } = require("express-validator");
-const { convert } = require("../utils/iklim");
+const { convert } = require("../controller/index");
 // const tanaman = require("../utils/tanaman");
 const Plant = require("../model/plant");
 const Climate = require("../model/climate");
