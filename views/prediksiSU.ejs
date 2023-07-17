@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="row center">
     <div class="col-md-4">
-      <a href="/data/prediksi" class="btn btn-dark">&laquo; Kembali</a>
+      <a href="/prediksi" class="btn btn-dark">&laquo; Kembali</a>
     </div>
     <div class="col-md-6">
       <h2 class="fw-bold">PREDIKSI SUHU UDARA</h2>
@@ -9,13 +9,14 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-md-6 mt-5">
+    <div class="col-md-6 mt-3">
       <div class="card">
         <div class="card-header">
-          <h3>Input Nilai X</h3>
+          <h3 class="fw-bold">INPUT NILAI</h3>
+          <h6>masukkan nilai suhu udara 12 bulan sebelumnya</h6>
         </div>
         <div class="card-body">
-          <form method="post" action="/data/prediksi/suhuUdara">
+          <form method="post" action="/prediksi/suhuUdara">
             <% if (typeof errors != 'undefined') { %>
             <div class="alert alert-danger" role="alert">
               <ul>
@@ -29,54 +30,54 @@
               <div class="col">
                 <div class="mb-3">
                   <label for="X1" class="form-label">Nilai X1</label>
-                  <input type="text" class="form-control" id="X1" name="X1" required placeholder="Masukkan nilai X1" />
+                  <input type="text" class="form-control" id="X1" name="X1" required placeholder="nilai X1" />
+                </div>
+                <div class="mb-3">
+                  <label for="X2" class="form-label">Nilai X2</label>
+                  <input type="text" class="form-control" id="X2" name="X2" required placeholder="nilai X2" />
                 </div>
                 <div class="mb-3">
                   <label for="X3" class="form-label">Nilai X3</label>
-                  <input type="text" class="form-control" id="X3" name="X3" required placeholder="Masukkan nilai X3" />
+                  <input type="text" class="form-control" id="X3" name="X3" required placeholder="nilai X3" />
+                </div>
+                <div class="mb-3">
+                  <label for="X4" class="form-label">Nilai X4</label>
+                  <input type="text" class="form-control" id="X4" name="X4" required placeholder="nilai X4" />
                 </div>
                 <div class="mb-3">
                   <label for="X5" class="form-label">Nilai X5</label>
-                  <input type="text" class="form-control" id="X5" name="X5" required placeholder="Masukkan nilai X5" />
+                  <input type="text" class="form-control" id="X5" name="X5" required placeholder="nilai X5" />
                 </div>
                 <div class="mb-3">
-                  <label for="X7" class="form-label">Nilai X7</label>
-                  <input type="text" class="form-control" id="X7" name="X7" required placeholder="Masukkan nilai X7" />
-                </div>
-                <div class="mb-3">
-                  <label for="X9" class="form-label">Nilai X9</label>
-                  <input type="text" class="form-control" id="X9" name="X9" required placeholder="Masukkan nilai X9" />
-                </div>
-                <div class="mb-3">
-                  <label for="X11" class="form-label">Nilai X11</label>
-                  <input type="text" class="form-control" id="X11" name="X11" required placeholder="Masukkan nilai X11" />
+                  <label for="X6" class="form-label">Nilai X6</label>
+                  <input type="text" class="form-control" id="X6" name="X6" required placeholder="nilai X6" />
                 </div>
               </div>
 
               <div class="col">
                 <div class="mb-3">
-                  <label for="X2" class="form-label">Nilai X2</label>
-                  <input type="text" class="form-control" id="X2" name="X2" required placeholder="Masukkan nilai X2" />
-                </div>
-                <div class="mb-3">
-                  <label for="X4" class="form-label">Nilai X4</label>
-                  <input type="text" class="form-control" id="X4" name="X4" required placeholder="Masukkan nilai X4" />
-                </div>
-                <div class="mb-3">
-                  <label for="X6" class="form-label">Nilai X6</label>
-                  <input type="text" class="form-control" id="X6" name="X6" required placeholder="Masukkan nilai X6" />
+                  <label for="X7" class="form-label">Nilai X7</label>
+                  <input type="text" class="form-control" id="X7" name="X7" required placeholder="nilai X7" />
                 </div>
                 <div class="mb-3">
                   <label for="X8" class="form-label">Nilai X8</label>
-                  <input type="text" class="form-control" id="X8" name="X8" required placeholder="Masukkan nilai X8" />
+                  <input type="text" class="form-control" id="X8" name="X8" required placeholder="nilai X8" />
+                </div>
+                <div class="mb-3">
+                  <label for="X9" class="form-label">Nilai X9</label>
+                  <input type="text" class="form-control" id="X9" name="X9" required placeholder="nilai X9" />
                 </div>
                 <div class="mb-3">
                   <label for="X10" class="form-label">Nilai X10</label>
-                  <input type="text" class="form-control" id="X10" name="X10" required placeholder="Masukkan nilai X10" />
+                  <input type="text" class="form-control" id="X10" name="X10" required placeholder="nilai X10" />
+                </div>
+                <div class="mb-3">
+                  <label for="X11" class="form-label">Nilai X11</label>
+                  <input type="text" class="form-control" id="X11" name="X11" required placeholder="nilai X11" />
                 </div>
                 <div class="mb-3">
                   <label for="X12" class="form-label">Nilai X12</label>
-                  <input type="text" class="form-control" id="X12" name="X12" required placeholder="Masukkan nilai X12" />
+                  <input type="text" class="form-control" id="X12" name="X12" required placeholder="nilai X12" />
                 </div>
               </div>
               <div class="text-center mb-5">

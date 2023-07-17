@@ -1,0 +1,59 @@
+<div class="container mt-3">
+  <div class="row center">
+    <div class="col-md-4">
+      <a href="/prediksi/curahHujan" class="btn btn-dark">&laquo; Kembali</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="fw-bold">PREDIKSI CURAH HUJAN</h2>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="fw-bold">Hasil Prediksi</h3>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md">
+              <form method="post" action="/prediksi/curahHujan?_method=PUT">
+                <input type="hidden" name="X1" value="<%= hasil[0] %>" />
+                <input type="hidden" name="X2" value="<%= hasil[1] %>" />
+                <input type="hidden" name="X3" value="<%= hasil[2] %>" />
+                <input type="hidden" name="X4" value="<%= hasil[3] %>" />
+                <input type="hidden" name="X5" value="<%= hasil[4] %>" />
+                <input type="hidden" name="X6" value="<%= hasil[5] %>" />
+                <input type="hidden" name="X7" value="<%= hasil[6] %>" />
+                <input type="hidden" name="X8" value="<%= hasil[7] %>" />
+                <input type="hidden" name="X9" value="<%= hasil[8] %>" />
+                <input type="hidden" name="X10" value="<%= hasil[9] %>" />
+                <input type="hidden" name="X11" value="<%= hasil[10] %>" />
+                <input type="hidden" name="X12" value="<%= hasil[11] %>" />
+
+                <table class="table table-dark table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Bulan</th>
+                      <th scope="col">Curah Hujan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for( let i = 0; i < 12; i++ ) { %>
+                    <tr>
+                      <th scope="row">Bulan ke - <%= i+1 %></th>
+                      <td><%= hasil[i] %> °C</td>
+                    </tr>
+                    <% }%>
+                  </tbody>
+                </table>
+                <button type="submit" class="btn btn-dark" onclick="return confirm('Apakah Anda yakin ingin memperbarui data hasil prediksi curah hujan?')">Simpan Perubahan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

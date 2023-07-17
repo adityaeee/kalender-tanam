@@ -36,14 +36,13 @@ router.post(
     }),
 
     check("chBB", "Curah Hujan harus numerik").isNumeric(),
-    check("chBB", "Curah Hujan harus numerik").isNumeric(),
     check("chBA", "Curah Hujan harus numerik").isNumeric(),
     check("suBB", "Suhu Udara harus numerik").isNumeric(),
     check("suBA", "Suhu Udara harus numerik").isNumeric(),
     check("masaTanam", "Masa Tanam harus numerik").isNumeric(),
 
     body("chBB").custom((value, { req }) => {
-      if (req.body.chBA >= value) {
+      if (value >= req.body.chBA) {
         throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
       }
       return true;
@@ -57,7 +56,6 @@ router.post(
     }),
   ],
   (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.render("PDTambahTanaman", {
@@ -94,11 +92,24 @@ router.put(
       return true;
     }),
     check("chBB", "Curah Hujan harus numerik").isNumeric(),
-    check("chBB", "Curah Hujan harus numerik").isNumeric(),
     check("chBA", "Curah Hujan harus numerik").isNumeric(),
     check("suBB", "Suhu Udara harus numerik").isNumeric(),
     check("suBA", "Suhu Udara harus numerik").isNumeric(),
     check("masaTanam", "Masa Tanam harus numerik").isNumeric(),
+
+    body("chBB").custom((value, { req }) => {
+      if (value >= req.body.chBA) {
+        throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
+      }
+      return true;
+    }),
+
+    body("suBB").custom((value, { req }) => {
+      if (value >= req.body.suBA) {
+        throw new Error("Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum");
+      }
+      return true;
+    }),
   ],
   async (req, res) => {
     const errors = validationResult(req);

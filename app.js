@@ -14,6 +14,7 @@ const hasilPrediksiRouter = require("./routes/hasilPrediksi");
 const pengelolaanDataRouter = require("./routes/pengelolaanData");
 const loginRouter = require("./routes/login");
 const checkRouter = require("./routes/check");
+const prediksiRouter = require("./routes/prediksi");
 
 //panggil mongoose
 require("./utils/db");
@@ -50,9 +51,10 @@ app.use(expressLayouts);
 //endpoint
 app.use("/home", indexRouter);
 app.use("/katam", kalenderTanamRouter);
-app.use("/prediksi", hasilPrediksiRouter);
+app.use("/hasil", hasilPrediksiRouter);
 app.use("/data", pengelolaanDataRouter);
 app.use("/login", loginRouter);
 app.use("/check", checkRouter);
+app.use("/prediksi", prediksiRouter);
 
 module.exports = app;

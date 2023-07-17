@@ -31,18 +31,29 @@ const dataFlow = function (data, result) {
   }
 };
 
-// const loadClimates = () => {
-//   const file = fs.readFileSync("data/climates.json", "utf8");
-//   const climates = JSON.parse(file);
-//   return climates;
-// };
+const t = 0.8;
+const a = 1.5;
+const b = 455;
+
+const normalisasi = (result) => {
+  const x = (t * (result - a)) / (b - a) + 0.1;
+  return x;
+};
+
+const denormalisasi = (result) => {
+  const x = ((result - 0.1) * (b - a)) / t + a;
+  return x;
+};
+
+// const norm = normalisasi(104.7);
+// const den = denormalisasi(norm);
+
+// console.log(norm);
+// console.log(den);
 
 // buah = "jeruk";
 // arr = ["melon", "semangka", "pisang", "nangka"];
 // arr.shift();
 // arr.push(buah);
 
-// console.log(arr);
-// console.log(arr[0]);
-
-module.exports = { convert, dataFlow };
+module.exports = { convert, dataFlow, normalisasi, denormalisasi };

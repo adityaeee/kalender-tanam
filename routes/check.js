@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Climate = require("../model/climate");
 const { convert } = require("../controller/index");
+const { body, validationResult, check } = require("express-validator");
 
 router.get("/", async (req, res) => {
   res.render("inputCheck", {
@@ -10,19 +11,50 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.post("/", async (req, res) => {
-  plant = req.body;
+router.post(
+  "/",
+  [
+    body("chBB").custom((value, { req }) => {
+      if (value >= req.body.chBA) {
+        throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
+      }
+      return true;
+    }),
 
-  climates = await Climate.find();
-  konversi = await convert(plant);
+    body("suBB").custom((value, { req }) => {
+      if (value >= req.body.suBA) {
+        throw new Error("Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum");
+      }
+      return true;
+    }),
 
-  res.render("kalenderTanam", {
-    layout: "layouts/main-layouts",
-    title: "Kalender Tanam",
-    plant,
-    climates,
-    konversi,
-  });
-});
+    check("chBB", "Curah Hujan harus numerik").isNumeric(),
+    check("chBA", "Curah Hujan harus numerik").isNumeric(),
+    check("suBB", "Suhu Udara harus numerik").isNumeric(),
+    check("suBA", "Suhu Udara harus numerik").isNumeric(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("inputCheck", {
+        layout: "layouts/main-layouts",
+        title: "Check your plant",
+        errors: errors.array(),
+      });
+    } else {
+      plant = req.body;
+
+      climates = await Climate.find();
+      konversi = await convert(plant);
+
+      res.render("kalenderTanam", {
+        layout: "layouts/main-layouts",
+        title: "Check your plant",
+        climates,
+        konversi,
+      });
+    }
+  }
+);
 
 module.exports = router;

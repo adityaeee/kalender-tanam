@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+body {
+  /* background-color: lightgreen; */
+  background-image: url(../images/background3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
 /* .color1 {
   color: #feffde;
 }
