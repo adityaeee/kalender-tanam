@@ -15,9 +15,9 @@
         <div class="card-body">
           <h4 class="card-title"><%= plant.tanaman.toUpperCase() %></h4>
           <h5 class="card=subtitle md-2 text-muted"><%= plant.ilmiah %></h5>
-          <p class="card-text">masa tanam : <%= plant.masaTanam%> Bulan</p>
-          <p class="card-text">Curah hujan : <%= plant.chBB%> - <%= plant.chBA %> mm / Bulan</p>
+          <p class="card-text">Curah Hujan : <%= plant.chBB%> - <%= plant.chBA %> mm / Bulan</p>
           <p class="card-text">Suhu Udara : <%= plant.suBB%> - <%= plant.suBA %> °C / Bulan</p>
+          <p class="card-text">masa tanam : <%= plant.masaTanam%> Bulan</p>
           <a href="/katam/<%= plant._id %>" class="btn btn-light">Cek Kalender Tanam</a>
         </div>
       </div>

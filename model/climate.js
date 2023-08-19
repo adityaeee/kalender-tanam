@@ -15,13 +15,12 @@ const Climate = mongoose.model("Climate", {
   },
 });
 
-// const bulan = [, , , , , , , , , , ,];
-
 // const climate1 = new Climate({
 //   bulan: "Desember",
 //   curahHujan: 250,
 //   suhuUdara: 26,
 // });
 // climate1.save();
+// console.log("ggwp")
 
 module.exports = Climate;

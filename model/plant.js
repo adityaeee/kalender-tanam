@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+// mongoose.connect(`mongodb://127.0.0.1:27017/KATAM`);
 
 const Plant = mongoose.model("Plant", {
   tanaman: {
@@ -30,5 +31,17 @@ const Plant = mongoose.model("Plant", {
     required: true,
   },
 });
+
+// const plant = new Plant({
+//   tanaman: "Padi",
+//   ilmiah:'Oryza sativa',
+//   chBB: 150,
+//   chBA: 500,
+//   suBB: 24,
+//   suBA: 29,
+//   masaTanam:4 
+// });
+// plant.save();
+// console.log("ggwp")
 
 module.exports = Plant;
