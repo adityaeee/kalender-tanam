@@ -30,6 +30,10 @@ const Plant = mongoose.model("Plant", {
     type: Number,
     required: true,
   },
+  gambar  : {
+    type: String,
+    required: false,
+  },
 });
 
 // const plant = new Plant({

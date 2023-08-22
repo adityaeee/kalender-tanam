@@ -3,12 +3,12 @@ const router = express.Router();
 const Climate = require("../model/climate");
 const { convert } = require("../controller/index");
 const { body, validationResult, check } = require("express-validator");
+const { dataLayout } = require("../utils/template");
 
 router.get("/", async (req, res) => {
-  res.render("inputCheck", {
-    layout: "layouts/main-layouts",
+  res.render("inputCheck", dataLayout(req, {
     title: "Check your plant",
-  });
+  }));
 });
 
 router.post(
@@ -36,23 +36,21 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("inputCheck", {
-        layout: "layouts/main-layouts",
+      res.render("inputCheck", dataLayout(req, {
         title: "Check your plant",
         errors: errors.array(),
-      });
+      }));
     } else {
       plant = req.body;
 
       climates = await Climate.find();
       konversi = await convert(plant);
 
-      res.render("kalenderTanam", {
-        layout: "layouts/main-layouts",
+      res.render("kalenderTanam", dataLayout(req, {
         title: "Check your plant",
         climates,
         konversi,
-      });
+      }));
     }
   }
 );

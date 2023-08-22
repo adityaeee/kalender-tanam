@@ -12,7 +12,7 @@ const indexRouter = require("./routes/index");
 const kalenderTanamRouter = require("./routes/kalenderTanam");
 const hasilPrediksiRouter = require("./routes/hasilPrediksi");
 const pengelolaanDataRouter = require("./routes/pengelolaanData");
-const loginRouter = require("./routes/login");
+const authRouter = require("./routes/auth");
 const checkRouter = require("./routes/check");
 const prediksiRouter = require("./routes/prediksi");
 
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 //configurasi flash
-app.use(cookieParser("secret"));
+app.use(cookieParser());
 app.use(
   session({
     cookie: { maxAge: 6000 },
@@ -53,7 +53,7 @@ app.use("/home", indexRouter);
 app.use("/katam", kalenderTanamRouter);
 app.use("/hasil", hasilPrediksiRouter);
 app.use("/data", pengelolaanDataRouter);
-app.use("/login", loginRouter);
+app.use("/auth", authRouter);
 app.use("/check", checkRouter);
 app.use("/prediksi", prediksiRouter);
 

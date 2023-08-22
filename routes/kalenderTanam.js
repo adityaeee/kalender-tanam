@@ -5,27 +5,48 @@ const { convert } = require("../controller/index");
 // const tanaman = require("../utils/tanaman");
 const Plant = require("../model/plant");
 const Climate = require("../model/climate");
+const { dataLayout } = require("../utils/template");
+const multer = require("multer");
+const upload = multer({
+  destination: function (req, file, cb) {
+    cb(null, "/tmp/my-uploads");
+  },
+  filename: function (req, file, cb) {
+    const unique = file.fieldname.split(".");
+    cb(null, req.tanaman + "." + unique[unique.length - 1]);
+  },
+  // fileFilter:  function (req, file, cb) {
+  //   const unique = file.fieldname.split(".");
+  //   req.filename=req.tanaman + "." + unique[unique.length - 1];
+  //   cb(null, req.tanaman + "." + unique[unique.length - 1]);
+  // },
+});
 
 /* GET home page. */
 router.get("/", async (req, res) => {
   plants = await Plant.find();
 
-  res.render("daftarTanaman", {
-    layout: "layouts/main-layouts",
-    title: "Daftar Tanaman",
-    plants,
-  });
+  res.render(
+    "daftarTanaman",
+    dataLayout(req, {
+      title: "Daftar Tanaman",
+      plants,
+    })
+  );
 });
 
 router.get("/tambahTanaman", (req, res) => {
-  res.render("PDTambahTanaman", {
-    layout: "layouts/main-layouts",
-    title: "Form Tambah Tanaman",
-  });
+  res.render(
+    "PDTambahTanaman",
+    dataLayout(req, {
+      title: "Form Tambah Tanaman",
+    })
+  );
 });
 
 router.post(
   "/",
+  upload.single("gambar"),
   [
     body("tanaman").custom(async (value) => {
       const duplikat = await Plant.findOne({ tanaman: value });
@@ -35,37 +56,43 @@ router.post(
       return true;
     }),
 
-    check("chBB", "Curah Hujan harus numerik").isNumeric(),
-    check("chBA", "Curah Hujan harus numerik").isNumeric(),
-    check("suBB", "Suhu Udara harus numerik").isNumeric(),
-    check("suBA", "Suhu Udara harus numerik").isNumeric(),
+    check("chBB", "Curah Hujan minimum harus numerik").isNumeric(),
+    check("chBA", "Curah Hujan maksimmum harus numerik").isNumeric(),
+    check("suBB", "Suhu Udara minimum harus numerik").isNumeric(),
+    check("suBA", "Suhu Udara maskimum harus numerik").isNumeric(),
     check("masaTanam", "Masa Tanam harus numerik").isNumeric(),
 
-    body("chBB").custom((value, { req }) => {
-      if (value >= req.body.chBA) {
-        throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
-      }
-      return true;
-    }),
+    // body("chBB").custom((value, { req }) => {
+    //   if (value >= req.body.chBA) {
+    //     throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
+    //   }
+    //   return true;
+    // }),
 
     body("suBB").custom((value, { req }) => {
       if (value >= req.body.suBA) {
-        throw new Error("Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum");
+        throw new Error(
+          "Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum"
+        );
       }
       return true;
     }),
   ],
   (req, res) => {
+    req.filename;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("PDTambahTanaman", {
-        layout: "layouts/main-layouts",
-        title: "Form Tambah Data Tanaman",
-        errors: errors.array(),
-      });
+      res.render(
+        "PDTambahTanaman",
+        dataLayout(req, {
+          title: "Form Tambah Data Tanaman",
+          errors: errors.array(),
+        })
+      );
     } else {
       // req.body.tanaman = req.body.tanaman.toLowerCase();
-      Plant.insertMany(req.body);
+      let data = {...req.body, gambar: req.filename}
+      Plant.insertMany(data);
       req.flash("msg", `Data tanaman ${req.body.tanaman} berhasil ditambahkan`);
       res.redirect("/data/tanaman");
     }
@@ -74,11 +101,13 @@ router.post(
 
 router.get("/edit/:_id", async (req, res) => {
   plant = await Plant.findOne({ _id: req.params._id });
-  res.render("PDEditTanaman", {
-    layout: "layouts/main-layouts",
-    title: "Kalender Tanam",
-    plant,
-  });
+  res.render(
+    "PDEditTanaman",
+    dataLayout(req, {
+      title: "Kalender Tanam",
+      plant,
+    })
+  );
 });
 
 router.put(
@@ -86,7 +115,10 @@ router.put(
   [
     body("tanaman").custom(async (value, { req }) => {
       const duplikat = await Plant.findOne({ tanaman: value });
-      if (value.toLowerCase() !== req.body.oldTanaman.toLowerCase() && duplikat) {
+      if (
+        value.toLowerCase() !== req.body.oldTanaman.toLowerCase() &&
+        duplikat
+      ) {
         throw new Error("Tanaman sudah ada");
       }
       return true;
@@ -97,16 +129,18 @@ router.put(
     check("suBA", "Suhu Udara harus numerik").isNumeric(),
     check("masaTanam", "Masa Tanam harus numerik").isNumeric(),
 
-    body("chBB").custom((value, { req }) => {
-      if (value >= req.body.chBA) {
-        throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
-      }
-      return true;
-    }),
+    // body("chBB").custom((value, { req }) => {
+    //   if (value >= req.body.chBA) {
+    //     throw new Error("Curah Hujan Minimum harus lebih kecil dari Curah Hujan Maksimum");
+    //   }
+    //   return true;
+    // }),
 
     body("suBB").custom((value, { req }) => {
       if (value >= req.body.suBA) {
-        throw new Error("Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum");
+        throw new Error(
+          "Suhu Udara Minimum harus lebih kecil dari Suhu Udara Maksimum"
+        );
       }
       return true;
     }),
@@ -114,12 +148,14 @@ router.put(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("PDEditTanaman", {
-        layout: "layouts/main-layouts",
-        title: "Form Ubah DataTanaman",
-        errors: errors.array(),
-        plant: req.body,
-      });
+      res.render(
+        "PDEditTanaman",
+        dataLayout(req, {
+          title: "Form Ubah DataTanaman",
+          errors: errors.array(),
+          plant: req.body,
+        })
+      );
     } else {
       await Plant.updateOne(
         { _id: req.body._id },
@@ -154,13 +190,15 @@ router.get("/:_id", async (req, res) => {
   climates = await Climate.find();
   konversi = await convert(plant);
 
-  res.render("kalenderTanam", {
-    layout: "layouts/main-layouts",
-    title: "Kalender Tanam",
-    plant,
-    climates,
-    konversi,
-  });
+  res.render(
+    "kalenderTanam",
+    dataLayout(req, {
+      title: "Kalender Tanam",
+      plant,
+      climates,
+      konversi,
+    })
+  );
 });
 
 module.exports = router;

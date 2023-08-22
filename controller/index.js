@@ -45,6 +45,11 @@ const denormalisasi = (result) => {
   return x;
 };
 
+const pembulatan = (value) => {
+  return value.toFixed(1)
+}
+
+
 // const norm = normalisasi(104.7);
 // const den = denormalisasi(norm);
 
@@ -56,4 +61,4 @@ const denormalisasi = (result) => {
 // arr.shift();
 // arr.push(buah);
 
-module.exports = { convert, dataFlow, normalisasi, denormalisasi };
+module.exports = { convert, dataFlow, normalisasi, denormalisasi, pembulatan };

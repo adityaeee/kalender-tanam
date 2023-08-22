@@ -15,14 +15,23 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/hasil">Hasil Prediksi</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/data">Pengelolaan Data</a>
-        </li>
+        <% if (user?.username) { %>
+          <li class="nav-item hide-item">
+            <a class="nav-link active" aria-current="page" href="/data">Pengelolaan Data</a>
+          </li>
+        <% } %>
+       
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li>
-          <a class="nav-link active" aria-current="page" href="/login">Login</a>
-        </li>
+        <% if (user?.username) { %>
+          <li>
+            <a class="nav-link active" aria-current="page" href="/auth/logout"><%= user.name %> / Logout</a>
+          </li>
+        <% } else {%>
+          <li>
+            <a class="nav-link active" aria-current="page" href="/auth/login">Login</a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>

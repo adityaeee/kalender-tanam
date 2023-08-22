@@ -3,20 +3,19 @@ const router = express.Router();
 const { body, validationResult, check } = require("express-validator");
 const Climate = require("../model/climate");
 const { default: axios } = require("axios");
-const { dataFlow, normalisasi, denormalisasi } = require("../controller/index");
+const { dataFlow, normalisasi, denormalisasi, pembulatan } = require("../controller/index");
+const { dataLayout } = require("../utils/template");
 
 router.get("/", async (req, res) => {
-  res.render("prediksi", {
-    layout: "layouts/main-layouts",
+  res.render("prediksi", dataLayout(req, {
     title: "Prediksi",
-  });
+  }));
 });
 
 router.get("/curahHujan", async (req, res) => {
-  res.render("prediksiCH", {
-    layout: "layouts/main-layouts",
+  res.render("prediksiCH", dataLayout(req, {
     title: "Prediksi",
-  });
+  }));
 });
 
 router.post(
@@ -38,11 +37,10 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("prediksiCH", {
-        layout: "layouts/main-layouts",
+      res.render("prediksiCH", dataLayout(req, {
         title: "Prediksi",
         errors: errors.array(),
-      });
+      }));
     } else {
       try {
         let result;
@@ -72,13 +70,15 @@ router.post(
           hasil.push(denormalisasi(result));
         }
 
-        res.render("prediksiCHresult", {
-          layout: "layouts/main-layouts",
+        for (var i = 0; i < hasil.length; i++) {
+          hasil[i] = pembulatan(hasil[i])
+        }
+
+        res.render("prediksiCHresult", dataLayout(req, {
           title: "Hasil Prediksi curah hujan",
           value,
           hasil,
-          // climates,
-        });
+        }));
       } catch (error) {
         console.log("ERROR", error);
       }
@@ -119,10 +119,9 @@ router.put("/curahHujan", async (req, res) => {
 });
 
 router.get("/suhuUdara", async function (req, res) {
-  res.render("prediksiSU", {
-    layout: "layouts/main-layouts",
+  res.render("prediksiSU", dataLayout(req, {
     title: "Prediksi",
-  });
+  }));
 });
 
 router.post(
@@ -144,11 +143,10 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.render("prediksiSU", {
-        layout: "layouts/main-layouts",
+      res.render("prediksiSU", dataLayout(req, {
         title: "Prediksi",
         errors: errors.array(),
-      });
+      }));
     } else {
       try {
         let result;
@@ -176,21 +174,22 @@ router.post(
           const predict = await axios.post("http://127.0.0.1:5000/predict/su", data);
           result = predict.data.res[0][0];
           hasil.push(result);
-
           // console.log(data);
+        }
+
+        for (var i = 0; i < hasil.length; i++) {
+          hasil[i] = pembulatan(hasil[i])
         }
         // console.log(hasil.length);
         // console.log(hasil);
 
         // const climates = await Climate.find();
 
-        res.render("prediksiSUresult", {
-          layout: "layouts/main-layouts",
+        res.render("prediksiSUresult", dataLayout(req, {
           title: "Hasil Prediksi suhu udara",
           value,
           hasil,
-          // climates,
-        });
+        }));
       } catch (error) {
         console.log("ERROR", error);
       }

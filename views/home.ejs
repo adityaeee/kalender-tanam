@@ -7,9 +7,7 @@
   </div>
   <div class="row">
     <div class="col text-center">
-      <% if (msg.length !== 0) { %>
-      <h1 class="display-4 fw-bolder"><%= msg %></h1>
-      <% } %>
+      
       <h1 class="display-4 fw-bolder">KALENDER TANAM <%= tahun %></h1>
       <h1 class="display-4 fw-bolder">ACEH UTARA</h1>
     </div>
@@ -26,3 +24,9 @@
     </div>
   </div>
 </div>
+
+<% if (msg.length !== 0) { %>
+  <script>
+    Swal.fire("<%= msg %>")
+  </script>
+  <% } %>
