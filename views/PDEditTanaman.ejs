@@ -18,44 +18,128 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <form method="post" action="/katam?_method=PUT">
+      <form method="post" id="formUbah" action="/katam?_method=PUT" enctype="multipart/form-data">
         <input type="hidden" name="_id" value="<%= plant._id %>" />
-        <input type="hidden" name="oldTanaman" value="<%= (plant.oldTanaman) ? plant.oldTanaman : plant.tanaman %>" />
+        <input
+          type="hidden"
+          name="oldTanaman"
+          value="<%= (plant.oldTanaman) ? plant.oldTanaman : plant.tanaman %>"
+        />
         <div class="mb-3">
           <label for="tanaman" class="form-label">Nama Tanaman</label>
-          <input type="text" class="form-control" id="tanaman" name="tanaman" required value="<%= plant.tanaman %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="tanaman"
+            name="tanaman"
+            required
+            value="<%= plant.tanaman %>"
+          />
         </div>
         <div class="mb-3">
           <label for="ilmiah" class="form-label">Nama Ilmiah</label>
-          <input type="text" class="form-control" id="ilmiah" name="ilmiah" required value="<%= plant.ilmiah %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="ilmiah"
+            name="ilmiah"
+            required
+            value="<%= plant.ilmiah %>"
+          />
         </div>
         <div class="mb-3">
           <label for="chBB" class="form-label">Curah Hujan Minimum</label>
-          <input type="text" class="form-control" id="chBB" name="chBB" required value="<%= plant.chBB %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="chBB"
+            name="chBB"
+            required
+            value="<%= plant.chBB %>"
+          />
         </div>
         <div class="mb-3">
           <label for="chBA" class="form-label">Curah Hujan Maksimum</label>
-          <input type="text" class="form-control" id="chBA" name="chBA" required value="<%= plant.chBA %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="chBA"
+            name="chBA"
+            required
+            value="<%= plant.chBA %>"
+          />
         </div>
         <div class="mb-3">
           <label for="suBB" class="form-label">Suhu Udara Minimum</label>
-          <input type="text" class="form-control" id="suBB" name="suBB" required value="<%= plant.suBB %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="suBB"
+            name="suBB"
+            required
+            value="<%= plant.suBB %>"
+          />
         </div>
         <div class="mb-3">
           <label for="suBA" class="form-label">Suhu Udara Maksimum</label>
-          <input type="text" class="form-control" id="suBA" name="suBA" required value="<%= plant.suBA %>" />
+          <input
+            type="text"
+            class="form-control"
+            id="suBA"
+            name="suBA"
+            required
+            value="<%= plant.suBA %>"
+          />
         </div>
         <div class="mb-4">
           <label for="masaTanam" class="form-label">Masa Tanam (bulan)</label>
-          <input type="text" class="form-control" id="masaTanam" name="masaTanam" required value="<%= plant.masaTanam %>" />
-          <div id="masaTanamHelp" class="form-text">lamanya waktu yang dibutuhkan tanaman sampai bisa panen</div>
+          <input
+            type="text"
+            class="form-control"
+            id="masaTanam"
+            name="masaTanam"
+            required
+            value="<%= plant.masaTanam %>"
+          />
+          <div id="masaTanamHelp" class="form-text">
+            lamanya waktu yang dibutuhkan tanaman sampai bisa panen
+          </div>
         </div>
-        <!-- <div class="mb-3">
+        <div class="mb-3">
           <label for="gambar" class="form-label">Upload Gambar</label>
-          <input type="file" class="form-control-file" id="gambar" name="gambar" />
-        </div> -->
-        <button type="submit" class="btn btn-dark" onclick="return confirm('Apakah Anda yakin ingin mengubah data tanaman ini ?')">Simpan Perubahan</button>
+          <input type="hidden" name="gambarLama" value="<%= plant.gambar %>" />
+          <input
+            type="file"
+            class="form-control-file"
+            id="gambar"
+            name="gambar"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-dark"
+          onclick="return confirmHandler(this, '<%= plant.tanaman %>')"
+        >
+          Simpan perubahan
+        </button>
       </form>
     </div>
   </div>
 </div>
+
+<script>
+  function confirmHandler(button, tanaman) {
+    Swal.fire({
+      title: `Apakah Anda yakin ingin mengubah data tanaman ${tanaman}?`,
+      showCancelButton: true,
+      confirmButtonText: "Update",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        document.getElementById("formUbah").submit();
+      } else if (result.isDenied) {
+        Swal.fire("Perubahan tidak disimpan", "", "info");
+      }
+    });
+  }
+</script>

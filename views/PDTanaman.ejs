@@ -13,7 +13,14 @@
   <div class="row">
     <div class="col-md">
       <% if (msg.length !== 0) { %>
-      <div class="alert alert-dark" role="alert"><%= msg %></div>
+      <script>
+        Swal.fire({
+          icon: "success",
+          title: "<%= msg %>",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      </script>
       <% } %>
       <table class="table table-dark table-striped">
         <thead>
@@ -39,11 +46,25 @@
             <td><%= plant.suBB %> °C</td>
             <td><%= plant.suBA %> °C</td>
             <td><%= plant.masaTanam %> Bulan</td>
-            <td><a href="/katam/edit/<%= plant._id %>" class="btn btn-dark badge">Edit</a></td>
             <td>
-              <form action="/katam?_method=DELETE" method="POST">
+              <a href="/katam/edit/<%= plant._id %>" class="btn btn-dark badge"
+                >Edit</a
+              >
+            </td>
+            <td>
+              <form
+                action="/katam?_method=DELETE"
+                id="formDelete"
+                method="POST"
+              >
                 <input type="hidden" name="_id" value="<%= plant._id%>" />
-                <button type="submit" class="btn btn-danger badge" onclick="return confirm('Apakah Anda yakin ingin menghapus tanaman <%= plant.tanaman %>')">Del</button>
+                <button
+                  type="button"
+                  class="btn btn-danger badge"
+                  onclick="return confirmHandler(this, '<%= plant.tanaman %>')"
+                >
+                  Del
+                </button>
               </form>
             </td>
           </tr>
@@ -53,3 +74,20 @@
     </div>
   </div>
 </div>
+
+<script>
+  function confirmHandler(button, tanaman) {
+    Swal.fire({
+      title: `apakah anda yakin ingin menghapus tanaman ${tanaman} ?`,
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        button.parentElement.submit();
+      } else if (result.isDenied) {
+        Swal.fire("Perubahan tidak disimpan", "", "info");
+      }
+    });
+  }
+</script>

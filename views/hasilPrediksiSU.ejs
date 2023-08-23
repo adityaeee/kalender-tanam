@@ -33,11 +33,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12 bg-light">
+    <div class="col-md-12 bg-light" id="data" data-climate="<%= JSON.stringify(climates) %>">
       <canvas id="myChart" width="200" height="100"></canvas>
-      <%= console.log(climates) %>
       <script>
         var ctx = document.getElementById("myChart").getContext("2d");
+        var data = JSON.parse(document.getElementById('data').dataset.climate);
+
+        data = data.map(item=>item.suhuUdara);
         var myChart = new Chart(ctx, {
           type: "line",
           data: {
@@ -45,7 +47,7 @@
             datasets: [
               {
                 label: "Suhu Udara",
-                data: [25.6, 25.7, 25.8, 26.2, 26.4, 26.5, 26.6, 26.5, 26.2, 25.8, 25.5, 25.3],
+                data: data,
                 borderWidth: 4,
                 borderColor: ["rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)", "rgba(0,0,0,1)"],
               },

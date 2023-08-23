@@ -1,26 +1,30 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
 const { body, validationResult, check } = require("express-validator");
 const { convert } = require("../controller/index");
-// const tanaman = require("../utils/tanaman");
 const Plant = require("../model/plant");
 const Climate = require("../model/climate");
 const { dataLayout } = require("../utils/template");
+
 const multer = require("multer");
-const upload = multer({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "/tmp/my-uploads");
+    cb(null, "./public/images");
   },
   filename: function (req, file, cb) {
-    const unique = file.fieldname.split(".");
-    cb(null, req.tanaman + "." + unique[unique.length - 1]);
+    const unique = file.originalname.split(".");
+    req.fileName = req.body.tanaman + "." + unique[unique.length - 1];
+
+    if (req.body?.gambarLama) {
+      fs.unlinkSync("./public/images/" + req.body?.gambarLama);
+    }
+    
+    cb(null, req.fileName);
   },
-  // fileFilter:  function (req, file, cb) {
-  //   const unique = file.fieldname.split(".");
-  //   req.filename=req.tanaman + "." + unique[unique.length - 1];
-  //   cb(null, req.tanaman + "." + unique[unique.length - 1]);
-  // },
 });
+
+const upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get("/", async (req, res) => {
@@ -90,8 +94,7 @@ router.post(
         })
       );
     } else {
-      // req.body.tanaman = req.body.tanaman.toLowerCase();
-      let data = {...req.body, gambar: req.filename}
+      let data = { ...req.body, gambar: req.fileName };
       Plant.insertMany(data);
       req.flash("msg", `Data tanaman ${req.body.tanaman} berhasil ditambahkan`);
       res.redirect("/data/tanaman");
@@ -112,6 +115,7 @@ router.get("/edit/:_id", async (req, res) => {
 
 router.put(
   "/",
+  upload.single("gambar"),
   [
     body("tanaman").custom(async (value, { req }) => {
       const duplikat = await Plant.findOne({ tanaman: value });
@@ -168,6 +172,7 @@ router.put(
             suBB: req.body.suBB,
             suBA: req.body.suBA,
             masaTanam: req.body.masaTanam,
+            gambar: req?.fileName || req.body.gambarLama
           },
         }
       );
