@@ -1,14 +1,47 @@
 <div class="container mt-3">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5 no-print">
       <a href="/katam" class="btn btn-dark">&laquo; Kembali</a>
     </div>
     <div class="col-md-4">
       <h2 class="fw-bold"><%= plant.tanaman.toUpperCase() %></h2>
     </div>
+    <div class="col-md-3 no-print">
+      <button onclick="window.print()" class="btn btn-dark">Cetak Kalender</button>
+    </div>
   </div>
 
-  <div class="row">
+  <div class="row no-print">
+    <div class="col-md">
+      <table class="table table-light table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Bulan</th>
+            <th scope="col">Curah Hujan</th>
+            <th scope="col">Suhu Udara</th>
+            <th scope="col">Keterangan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% climates.forEach((climate,i) => { %>
+          <tr>
+            <th scope="row"><%= climate.bulan %></th>
+            <td><%= climate.curahHujan %> mm</td>
+            <td><%= climate.suhuUdara %> °C</td>
+            <% if (konversi[i] !== "0" ) { %>
+            <td><a href="" class="btn btn-success badge">Layak</a></td>
+            <% } else { %>
+            <td><a href="" class="btn btn-danger badge">Tidak Layak</a></td>
+            <% } %>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  
+  <div class="row print-kalender">
     <div class="col-md">
       <table class="table table-light table-striped">
         <thead>
@@ -37,3 +70,4 @@
     </div>
   </div>
 </div>
+

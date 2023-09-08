@@ -11,18 +11,20 @@ body {
   background-position: center;
 }
 
-/* .color1 {
-  color: #feffde;
+.print-kalender{
+  display: none;
 }
 
-.color2 {
-  color: #ddffbc;
-}
-
-.color3 {
-  color: #91c788;
-}
-
-.color4 {
-  color: #52734d;
+/* .no-print {
+  display: inherit;
 } */
+
+@media print {
+  .no-print {
+    display: none;
+  }
+  .print-kalender{
+    display: block;
+  }
+
+}
